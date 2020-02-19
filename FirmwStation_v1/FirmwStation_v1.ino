@@ -39,12 +39,13 @@ void loop() {
   if (debug == true) {
     printValuesBME();
   }else{
-    Serial.println(temperature);
-    Serial.println("|");
-    Serial.println(pressure);
-    Serial.println("|");
-    Serial.println(altitude);
-    Serial.println("|");
-    Serial.println(humidity);
+    Serial.print(temperature);
+    Serial.print("|");
+    Serial.print(pressure);
+    Serial.print("|");
+    Serial.print(altitude);
+    Serial.print("|");
+    Serial.print(humidity);
+    Serial.println();
   }
 }
