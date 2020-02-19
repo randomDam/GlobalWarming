@@ -1,10 +1,25 @@
 PImage [] ims = new PImage[4];
 PFont typo;
 //VAR
-int temparature=0;
-int pression=0;
-int altitude=0;
-int humidity=0;
+String [] names = {
+    "temparature", 
+    "pression", 
+    "altitude", 
+    "humidity", 
+    "winddir", 
+    "windspeedmph", 
+    "windgustmph", 
+    "windgustdir", 
+    "windspdmph_avg2m", 
+    "winddir_avg2m", 
+    "windgustmph_10m", 
+    "windgustdir_10m", 
+    "rainin", 
+    "dailyrainin", 
+    "batt_lvl", 
+    "light_lvl", 
+};
+DataVal [] dataVals = new DataVal[names.length];
 
 //
 void initMeteo() {
@@ -14,24 +29,24 @@ void initMeteo() {
     ims[3] = loadImage("invader.png");
 
     typo = loadFont("InputMono-Regular-15.vlw");
+
+    for (int i=0; i<dataVals.length; i++) {
+        dataVals[i] = new DataVal(names[i]);
+    }
 }
 
 void drawMeteo() {
     fill(255);
     textFont(typo);
-    
+
     text("Meteo Dispatcher", 10, 20);
 
     int px=10;
     int py=60;
     int margeY=20;
 
-    text("Temp : "+temparature, px, py);
-    py+=margeY;
-    text("Press : "+pression, px, py);
-    py+=margeY;
-    text("Alti : "+altitude, px, py);
-    py+=margeY;
-    text("Humi : "+altitude, px, py);
-    py+=margeY;
+    for (int i=0; i<dataVals.length; i++) {
+        text(dataVals[i].name+" > ", px, py+margeY*i);
+        text(dataVals[i].val, px+200, py+margeY*i);
+    }
 }

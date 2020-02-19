@@ -1,5 +1,6 @@
 
 boolean debug = false;
+long lastTime = 0;
 //DATAS-------------------------------------------------------------------
 int temperature;
 int pressure;
@@ -23,6 +24,10 @@ void setup() {
   initBME280();
   Serial.println("bme > OK");
 
+  Serial.println("weather start");
+  initWeatherShield();
+  Serial.begin("weather > OK");
+
   Serial.println("ready");
 }
 
@@ -36,16 +41,23 @@ void loop() {
   //Bme
   runBME();
 
-  if (debug == true) {
-    printValuesBME();
-  }else{
-    Serial.print(temperature);
-    Serial.print("|");
-    Serial.print(pressure);
-    Serial.print("|");
-    Serial.print(altitude);
-    Serial.print("|");
-    Serial.print(humidity);
-    Serial.println();
+  //WeatherShield
+  runWeather();
+
+  delay(10);
+
+  if (millis() - lastTime >= 1000) {
+    lastTime += 1000;
+
+    if (debug == true) {
+      printValuesBME_DEBUG();
+      printWeather_Debug();
+      
+    } else {
+      printValuesBME();
+      printWeather();
+
+      Serial.println();
+    }
   }
 }

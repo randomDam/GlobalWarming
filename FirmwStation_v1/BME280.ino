@@ -45,7 +45,7 @@ void runBME() {
   humidity = bme.readHumidity();
 }
 
-void printValuesBME() {
+void printValuesBME_DEBUG() {
   Serial.print("Temperature = ");
   Serial.print(bme.readTemperature());
   Serial.println(" *C");
@@ -64,4 +64,14 @@ void printValuesBME() {
   Serial.println(" %");
 
   Serial.println();
+}
+
+void printValuesBME() {
+  Serial.print(temperature);
+  Serial.print("|");
+  Serial.print(pressure);
+  Serial.print("|");
+  Serial.print(altitude);
+  Serial.print("|");
+  Serial.print(humidity);
 }
