@@ -36,8 +36,15 @@ void loop() {
   //Bme
   runBME();
 
-
   if (debug == true) {
     printValuesBME();
+  }else{
+    Serial.println(temperature);
+    Serial.println("|");
+    Serial.println(pressure);
+    Serial.println("|");
+    Serial.println(altitude);
+    Serial.println("|");
+    Serial.println(humidity);
   }
 }
