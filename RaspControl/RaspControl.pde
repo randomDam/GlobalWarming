@@ -1,6 +1,8 @@
 import processing.serial.*;
 
 Serial myPort;
+int lf = 10;
+
 boolean isSerialOn=false;
 
 void setup() 
@@ -12,6 +14,7 @@ void setup()
     if (isSerialOn && Serial.list().length>0) {
         String portName = Serial.list()[1];
         myPort = new Serial(this, portName, 115200);
+        myPort.bufferUntil(lf);
     }
     initLED();
 }
@@ -21,7 +24,3 @@ void draw() {
     runLED();
     drawMeteo();
 }
-
-void serialEvent(Serial p) { 
-    println(p.readBytes());
-} 
