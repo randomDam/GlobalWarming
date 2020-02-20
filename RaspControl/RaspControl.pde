@@ -7,7 +7,7 @@ boolean isSerialOn=false;
 
 void setup() 
 {
-    size(600, 400, P2D);
+    size(800, 400, P2D);
     initLED();
 	initMeteo();	
 

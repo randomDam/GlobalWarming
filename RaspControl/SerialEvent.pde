@@ -9,7 +9,7 @@ void serialEvent(Serial p) {
 
     if (datas.length>=dataVals.length) {
         for (int i=0; i<dataVals.length; i++) {
-            dataVals[i].val = float(datas[i]);
+            dataVals[i].set(float(datas[i]));
         }
     }
 }

@@ -46,7 +46,16 @@ void drawMeteo() {
     int margeY=20;
 
     for (int i=0; i<dataVals.length; i++) {
+        fill(255);
         text(dataVals[i].name+" > ", px, py+margeY*i);
-        text(dataVals[i].val, px+200, py+margeY*i);
+        
+        fill(150);
+        text(dataVals[i].val_min, px+200, py+margeY*i);
+        
+        fill(255);
+        text(dataVals[i].val, px+300, py+margeY*i);
+        
+        fill(150);
+        text(dataVals[i].val_max, px+400, py+margeY*i);
     }
 }
