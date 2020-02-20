@@ -8,21 +8,30 @@ PGraphics zone;
 void initLED() {
     zone = createGraphics(8, 8, P2D);
     ((PGraphicsOpenGL)zone).textureSampling(2);
+
+    zone.beginDraw();
+    zone.background(0);
+    zone.fill(255, 0, 0);
+    zone.noStroke();
+    zone.rect(0, 0, 10, 10);
+    zone.endDraw();
+    //zone.loadPixels();
 }
 //---------------------------------------------------------
 //RUN LED
 //---------------------------------------------------------
 void runLED() {
-    zone.beginDraw();
+    //zone.beginDraw();
     //zone.image(ims[indexI], 0, 0);
-    zone.endDraw();
-    zone.loadPixels();
+    //zone.endDraw();
 
-    image(zone, 20, 20, 8*8, 8*8);
+    image(zone, 570, 50, 8*8*2, 8*8*2);
 
-    if (frameCount>10 && frameCount%5==0) {
-        sendZone();
-    }
+    if (isSerialOn)
+        if (frameCount>10 && frameCount%5==0) {
+            zone.loadPixels();
+            sendZone();
+        }
 }
 //---------------------------------------------------------
 //SEND RANDOM
@@ -36,7 +45,7 @@ void sendRandom() {
         data[i+1]=byte(random(200));
         data[i+2]=byte(random(200));
     }
-    myPort.write(data);
+    if (isSerialOn)myPort.write(data);
 }
 //---------------------------------------------------------
 //SEND TEST RED
@@ -56,7 +65,7 @@ void sendTest_UNI(int r, int g, int b) {
     data[1+index+1]=byte(g);
     data[1+index+2]=byte(b);
 
-    myPort.write(data);
+    if (isSerialOn)myPort.write(data);
     index+=3;
     if (index>=64*3)index=0;
 }
@@ -72,6 +81,6 @@ void sendZone() {
         data[i*3+2]=(byte)green(zone.pixels[i]);
         data[i*3+3]=(byte)blue(zone.pixels[i]);
     }
-    
-    if(isSerialOn)myPort.write(data);
+
+    if (isSerialOn)myPort.write(data);
 }

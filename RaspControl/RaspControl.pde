@@ -16,11 +16,11 @@ void setup()
         myPort = new Serial(this, portName, 115200);
         myPort.bufferUntil(lf);
     }
-    initLED();
 }
 
 void draw() {
     background(0);
     runLED();
+    
     drawMeteo();
 }
